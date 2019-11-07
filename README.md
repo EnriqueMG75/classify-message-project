@@ -1,4 +1,4 @@
-# Disaster Response Pipeline Project
+# Classifying Messages Using Machine Learning and NLP
 ### Project Overview:
 
 This project is about using NLP and Machine Learning to train a model that can classify messages.
