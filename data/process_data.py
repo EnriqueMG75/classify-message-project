@@ -7,7 +7,11 @@ import numpy as np
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
-    
+    '''
+    Load data from csv files
+    Args: csv filepaths
+    Returns: Pandas DataFrame with the two files merged
+    '''
     messages = pd.read_csv('disaster_messages.csv')
     categories = pd.read_csv('disaster_categories.csv')
     # merge datasets
@@ -19,6 +23,11 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    '''
+    Several transforming and cleaning processes
+    Arg: Dataframe to clean
+    Return: Cleaned DataFrame
+    '''
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(pat=';', expand=True)
     # select the first row of the categories dataframe
@@ -45,6 +54,10 @@ def clean_data(df):
     return df
 
 def save_data(df, database_filename):
+    '''
+    Save data to a SQlite DataBase
+    Args: DataFrame
+    '''
     engine = create_engine('sqlite:///' + database_filename)
     df.to_sql('MessageNewTable2', engine, index=False)  
 
