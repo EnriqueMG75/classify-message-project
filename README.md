@@ -16,7 +16,7 @@ Using Machine Learning Engineering and NLP processing, I have built an ML pipeli
 
 3. Build a Web App
 
-Using the Web App framework Flask I have created a web app where users can interact with the trained model. Users can input a message and the app returns the categories which belongs the message to. Also they can explore the data with some plots
+Using the Web App framework Flask, I have created a web app where users can interact with the trained model. Users can input a message and the app returns the categories which belongs the message to. Also they can explore the data with some plots
 
 ### Instructions:
 
