@@ -26,8 +26,8 @@ def load_data(database_filepath):
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table('MessageNewTable', engine)
     
-    # Take a sample to run faster:
-    df = df.sample(n=1000, random_state=42)
+    # Take a sample to run faster (optional):
+    #df = df.sample(n=1000, random_state=42)
     
     # Define feature and target variables X and Y and category names
     X = df['message']
@@ -38,6 +38,11 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    '''
+    Tokenize and other message processing to extract words
+    Args: messages
+    Return: Cleaned tokens(words)
+    '''
     # remove punctuation characters
     text = re.sub(r"[^a-zA-Z0-9]", " ", text)
     # tokenize text
@@ -62,7 +67,7 @@ def build_model():
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
-    '''
+    
     parameters = {
         'vect__ngram_range': ((1, 1), (1, 2)),
         'vect__max_df': (0.5, 0.75, 1.0),
@@ -74,13 +79,15 @@ def build_model():
     }
     
     cv = GridSearchCV(pipeline, param_grid = parameters)
-    '''
-    #return cv
-    return pipeline
+    
+    return cv
+    #return pipeline
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
     
+    # Evaluate the model with classification_report and accuracy_score
+
     Y_pred = model.predict(X_test)
     
     for i in range(len(category_names)):
